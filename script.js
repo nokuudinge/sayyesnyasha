@@ -239,57 +239,44 @@ function handleYes() {
     }
     hasClickedYes = true;
 
-    const responseDiv = document.getElementById('responseMessage');
-    responseDiv.className = 'response-message success-message';
-    responseDiv.innerHTML = `
-        <div style="animation: zoomIn 0.8s ease-out;">
-            🎉 YES! I'm the happiest person alive! 🎉<br>
-            <span style="font-size: 0.8em; margin-top: 10px; display: block;">
-                You've made me the happiest person in the world, Nyasha! 💕
-            </span>
-            <br>
-            <span style="font-size: 0.7em; color: #FFD700; display: block; margin-top: 15px;">
-                🎵 My Song Dedication: "She's Mine" by J. Cole
-            </span>
-        </div>
-    `;
-
-    // Hide hint message
-    document.getElementById('hintMessage').style.display = 'none';
-
-    // Disable buttons
-    const yesBtn = document.querySelector('.yes-btn');
-    const noBtn = document.getElementById('noBtn');
-    yesBtn.disabled = true;
-    noBtn.disabled = true;
-    yesBtn.style.opacity = '0.6';
-    noBtn.style.opacity = '0.6';
-    noBtn.style.cursor = 'not-allowed';
-    yesBtn.style.cursor = 'not-allowed';
-    noBtn.style.display = 'none';
-
-    // Pause background music and play celebration song
-    bgMusic.pause();
-    const celebrationSong = document.getElementById('celebrationSong');
-    celebrationSong.play().catch(error => {
-        console.log('Could not play celebration song:', error);
-    });
-
-    // Start confetti
+    // Start immediate celebration effects
     confetti.start();
-
-    // Create floating hearts
     createFloatingHearts();
-
-    // Play celebration effect
     celebrate();
 
-    // Continuous celebration
-    setInterval(() => {
-        if (Math.random() > 0.7) {
-            createFloatingHearts();
-        }
-    }, 2000);
+    // Wait a moment for the celebration to start, then transition to celebration page
+    setTimeout(() => {
+        const valentinePage = document.getElementById('valentinePage');
+        const celebrationPage = document.getElementById('celebrationPage');
+
+        // Fade out valentine page
+        valentinePage.style.opacity = '0';
+        valentinePage.style.transform = 'scale(0.9)';
+
+        setTimeout(() => {
+            valentinePage.classList.add('hidden');
+            celebrationPage.classList.remove('hidden');
+
+            // Pause background music and play celebration song
+            bgMusic.pause();
+            const celebrationSong = document.getElementById('celebrationSong');
+            celebrationSong.play().catch(error => {
+                console.log('Could not play celebration song:', error);
+            });
+
+            // More confetti on celebration page
+            setTimeout(() => {
+                confetti.start();
+            }, 500);
+
+            // Continuous celebration
+            const celebrationInterval = setInterval(() => {
+                if (Math.random() > 0.7) {
+                    createFloatingHearts();
+                }
+            }, 2000);
+        }, 800);
+    }, 1000);
 }
 
 // Handle No button - it runs away more dramatically and YES button grows
