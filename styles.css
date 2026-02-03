@@ -25,13 +25,15 @@ html {
 body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #FFF0F5 0%, #FFE4E9 25%, #FFB6C1 50%, #FF69B4 75%, #FF1744 100%);
+    background-attachment: fixed;
     min-height: 100vh;
     /* iOS Safari viewport fix */
     min-height: -webkit-fill-available;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     position: relative;
     /* Prevent text size adjustment on orientation change */
     -webkit-text-size-adjust: 100%;
@@ -935,21 +937,24 @@ canvas {
 @media (max-width: 768px) {
     body {
         overflow-x: hidden;
+        overflow-y: auto;
     }
 
     .container {
         padding: 10px;
         min-height: 100vh;
         min-height: -webkit-fill-available;
+        overflow-y: visible;
     }
 
     .content {
         padding: 30px 20px;
-        margin: 10px;
+        margin: 10px auto;
         max-width: 100%;
         width: 95%;
         max-height: none;
         border-radius: 25px;
+        overflow-y: visible;
     }
 
     .title {
@@ -1081,13 +1086,15 @@ canvas {
 @media (max-width: 480px) {
     .container {
         padding: 5px;
+        overflow-y: visible;
     }
 
     .content {
         padding: 25px 15px;
-        margin: 5px;
+        margin: 5px auto;
         width: 98%;
         border-radius: 20px;
+        overflow-y: visible;
     }
 
     .title {
