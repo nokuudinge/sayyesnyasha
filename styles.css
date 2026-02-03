@@ -16,15 +16,28 @@
     --shadow: rgba(0, 0, 0, 0.1);
 }
 
+html {
+    height: 100%;
+    /* iOS Safari viewport fix */
+    height: -webkit-fill-available;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #FFF0F5 0%, #FFE4E9 25%, #FFB6C1 50%, #FF69B4 75%, #FF1744 100%);
     min-height: 100vh;
+    /* iOS Safari viewport fix */
+    min-height: -webkit-fill-available;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
     position: relative;
+    /* Prevent text size adjustment on orientation change */
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 /* Animated Background */
@@ -529,6 +542,11 @@ body {
     position: relative;
     overflow: hidden;
     font-family: 'Poppins', sans-serif;
+    /* Better touch handling on mobile */
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .btn span {
@@ -915,62 +933,94 @@ canvas {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    .container {
+        padding: 10px;
+        min-height: 100vh;
+        min-height: -webkit-fill-available;
+    }
+
     .content {
-        padding: 40px 30px;
-        margin: 20px;
-        max-width: 95%;
+        padding: 30px 20px;
+        margin: 10px;
+        max-width: 100%;
+        width: 95%;
+        max-height: none;
+        border-radius: 25px;
     }
 
     .title {
-        font-size: 2.5em;
+        font-size: 2.2em;
+        margin-bottom: 15px;
     }
 
     .script-font {
-        font-size: 2.8em;
+        font-size: 2.3em;
+        line-height: 1.3;
     }
 
     .message {
-        font-size: 1.1em;
+        font-size: 1em;
+        line-height: 1.5;
+    }
+
+    .message-box {
+        padding: 20px 15px;
+        margin: 15px 0;
     }
 
     .emoji {
-        font-size: 2.5em;
+        font-size: 2em;
     }
 
     .surprise-emoji-item {
-        font-size: 4em;
+        font-size: 3.5em;
     }
 
     .btn {
-        padding: 15px 35px;
-        font-size: 1.1em;
+        padding: 15px 30px;
+        font-size: 1em;
         letter-spacing: 1px;
+        width: 100%;
+        max-width: 300px;
     }
 
     .button-container {
         flex-direction: column;
         gap: 15px;
+        align-items: center;
     }
 
     .love-meter {
         height: 25px;
     }
 
+    .love-meter-text {
+        font-size: 1.1em;
+    }
+
     .reasons-preview {
-        padding: 20px;
+        padding: 15px;
+    }
+
+    .reasons-title {
+        font-size: 1em;
     }
 
     .reason-item {
-        font-size: 1em;
+        font-size: 0.95em;
         padding: 10px 15px;
     }
 
     .music-toggle {
         width: 50px;
         height: 50px;
-        bottom: 20px;
-        right: 20px;
-        font-size: 1.5em;
+        bottom: 15px;
+        right: 15px;
+        font-size: 1.4em;
     }
 
     .orb {
@@ -981,31 +1031,231 @@ canvas {
         width: 250px;
         height: 250px;
     }
-}
 
-@media (max-width: 480px) {
-    .title {
+    /* Celebration page mobile adjustments */
+    .celebration-title {
         font-size: 2em;
     }
 
-    .script-font {
-        font-size: 2.2em;
+    .celebration-big-text {
+        font-size: 1.2em;
     }
 
-    .message {
+    .heart-big {
+        font-size: 3em;
+    }
+
+    .song-dedication {
+        padding: 20px 15px;
+    }
+
+    .dedication-title {
+        font-size: 1.3em;
+    }
+
+    .song-name {
+        font-size: 1.8em;
+    }
+
+    .artist-name {
+        font-size: 1.1em;
+    }
+
+    .dedication-text {
         font-size: 1em;
     }
 
-    .btn {
-        padding: 12px 25px;
-        font-size: 1em;
+    .final-text {
+        font-size: 1.3em;
+    }
+
+    .sparkles {
+        top: 10px;
+    }
+
+    .sparkle {
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 5px;
     }
 
     .content {
-        padding: 30px 20px;
+        padding: 25px 15px;
+        margin: 5px;
+        width: 98%;
+        border-radius: 20px;
+    }
+
+    .title {
+        font-size: 1.8em;
+        margin-bottom: 12px;
+    }
+
+    .script-font {
+        font-size: 1.9em;
+    }
+
+    .message {
+        font-size: 0.95em;
+    }
+
+    .message-box {
+        padding: 15px 12px;
+    }
+
+    .btn {
+        padding: 14px 25px;
+        font-size: 0.95em;
+        max-width: 280px;
     }
 
     .surprise-emoji-item {
         font-size: 3em;
+    }
+
+    .emoji {
+        font-size: 1.8em;
+    }
+
+    .love-meter-text {
+        font-size: 1em;
+    }
+
+    .percentage {
+        font-size: 1.2em;
+    }
+
+    .reason-item {
+        font-size: 0.9em;
+        padding: 8px 12px;
+    }
+
+    /* Celebration page small mobile adjustments */
+    .celebration-title {
+        font-size: 1.6em;
+    }
+
+    .celebration-big-text {
+        font-size: 1.1em;
+    }
+
+    .heart-big {
+        font-size: 2.5em;
+        gap: 15px;
+    }
+
+    .heart-explosion {
+        gap: 15px;
+        margin: 20px 0;
+    }
+
+    .song-dedication {
+        padding: 15px 10px;
+        margin: 20px 0;
+    }
+
+    .dedication-title {
+        font-size: 1.1em;
+    }
+
+    .song-name {
+        font-size: 1.5em;
+    }
+
+    .artist-name {
+        font-size: 1em;
+    }
+
+    .dedication-text {
+        font-size: 0.95em;
+        line-height: 1.6;
+    }
+
+    .final-text {
+        font-size: 1.2em;
+    }
+
+    .music-note {
+        font-size: 1.5em;
+    }
+
+    .sparkle {
+        font-size: 1.3em;
+    }
+}
+
+/* Very small screens (iPhone SE, etc.) */
+@media (max-width: 375px) {
+    .content {
+        padding: 20px 12px;
+    }
+
+    .title {
+        font-size: 1.6em;
+    }
+
+    .script-font {
+        font-size: 1.7em;
+    }
+
+    .message {
+        font-size: 0.9em;
+    }
+
+    .btn {
+        padding: 12px 20px;
+        font-size: 0.9em;
+    }
+
+    .celebration-title {
+        font-size: 1.4em;
+    }
+
+    .song-name {
+        font-size: 1.3em;
+    }
+}
+
+/* Landscape orientation on mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+    .container {
+        align-items: flex-start;
+        padding-top: 10px;
+    }
+
+    .content {
+        max-height: none;
+        margin: 5px auto;
+        padding: 20px 15px;
+    }
+
+    .title {
+        font-size: 1.8em;
+        margin-bottom: 10px;
+    }
+
+    .message-box {
+        padding: 15px;
+        margin: 10px 0;
+    }
+
+    .button-container {
+        margin-top: 15px;
+    }
+
+    .btn {
+        padding: 10px 25px;
+    }
+
+    .celebration-title {
+        font-size: 1.5em;
+    }
+
+    .song-dedication {
+        padding: 15px;
     }
 }
